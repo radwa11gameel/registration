@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ doctor.user.get_full_name }}</h1>
+  <p>Specialty: {{ doctor.specialty }}</p>
+  <p>Medical License Number: {{ doctor.medical_license_number }}</p>
+  <h2>Patients:</h2>
+  <ul>
+    {% for patient in doctor.patients.all %}
+      <li><a href="{% url 'myapp:patient_detail' patient.pk %}">{{ patient.user.get_full_name }}</a></li>
+    {% empty %}
+      <li>No patients found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
